@@ -1,0 +1,68 @@
+# =========================
+# Python & Django (Backend)
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+
+# Віртуальне оточення
+venv/
+env/
+.venv/
+
+# Django специфічне
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+
+# =========================
+# Node.js & Vue.js (Frontend)
+# =========================
+node_modules/
+dist/
+.nuxt/
+.output/
+coverage/
+
+# Логи NPM/Yarn
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# Environment Variables & Secrets (КРИТИЧНО)
+# =========================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+
+# =========================
+# IDE & Редактори коду
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.patch
+
+# =========================
+# Системні файли (OS)
+# =========================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
