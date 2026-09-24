@@ -53,46 +53,19 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="group border-2 border-black bg-[#F4F4F0] p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-black hover:text-[#F4F4F0] transition-all cursor-crosshair">
-          <div class="font-pixel text-3xl mb-4 group-hover:text-blue-500">[01]</div>
-          <h4 class="text-2xl font-bold uppercase mb-3">Самореалізація</h4>
-          <p class="font-medium text-sm leading-relaxed">
-            Освіта на кафедрі дозволить реалізувати себе в науці, промисловості та бізнесі. Прямий шлях від студента до Senior інженера.
-          </p>
-        </div>
-        <div class="group border-2 border-black bg-[#F4F4F0] p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-black hover:text-[#F4F4F0] transition-all cursor-crosshair">
-          <div class="font-pixel text-3xl mb-4 group-hover:text-blue-500">[02]</div>
-          <h4 class="text-2xl font-bold uppercase mb-3">Hardcore Дисципліни</h4>
-          <p class="font-medium text-sm leading-relaxed">
-            Телекомунікації, розгортання мереж, бази даних, Штучний Інтелект та IoT. Працюємо з сучасними стеками замість застарілих методичок.
-          </p>
-        </div>
-        <div class="group border-2 border-black bg-[#c7d2fe] p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-blue-700 hover:text-[#F4F4F0] transition-all cursor-crosshair">
-          <div class="font-pixel text-3xl mb-4 text-black group-hover:text-black">[03]</div>
-          <h4 class="text-2xl font-bold uppercase mb-3 text-black group-hover:text-[#F4F4F0]">Практична підготовка</h4>
-          <p class="font-medium text-sm leading-relaxed text-black group-hover:text-[#F4F4F0]">
-            Перспективні технологічні рішення на основі апаратного та програмного забезпечення. Пишемо код, піднімаємо контейнери, налаштовуємо сервери.
-          </p>
-        </div>
-        <div class="group border-2 border-black bg-[#F4F4F0] p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-black hover:text-[#F4F4F0] transition-all cursor-crosshair">
-          <div class="font-pixel text-3xl mb-4 group-hover:text-blue-500">[04]</div>
-          <h4 class="text-2xl font-bold uppercase mb-3">Експертний склад</h4>
-          <p class="font-medium text-sm leading-relaxed">
-            Заняття проводять професори, доценти та провідні розробники сучасних інформаційних систем, які знають продакшен зсередини.
-          </p>
-        </div>
-        <div class="group border-2 border-black bg-[#F4F4F0] p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-black hover:text-[#F4F4F0] transition-all cursor-crosshair">
-          <div class="font-pixel text-3xl mb-4 group-hover:text-blue-500">[05]</div>
-          <h4 class="text-2xl font-bold uppercase mb-3">Стандарти ITU</h4>
-          <p class="font-medium text-sm leading-relaxed">
-            Навчальний план повністю розроблено за жорсткими стандартами International Telecommunications Union.
-          </p>
-        </div>
-        <div class="group border-2 border-black bg-[#F4F4F0] p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-black hover:text-[#F4F4F0] transition-all cursor-crosshair">
-          <div class="font-pixel text-3xl mb-4 group-hover:text-blue-500">[06]</div>
-          <h4 class="text-2xl font-bold uppercase mb-3">Світова інтеграція</h4>
-          <p class="font-medium text-sm leading-relaxed">
-            Співпраця з іноземними компаніями та закордонними навчальними закладами. Відкритий шлях до глобального IT-ринку.
+        <!-- Картки згенеровані зі списку whyUs (див. script) -->
+        <div
+          v-for="(item, i) in whyUs"
+          :key="item.title"
+          class="group border-2 border-black p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all cursor-crosshair"
+          :class="item.accent
+            ? 'bg-[#c7d2fe] hover:bg-blue-700 hover:text-[#F4F4F0]'
+            : 'bg-[#F4F4F0] hover:bg-black hover:text-[#F4F4F0]'"
+        >
+          <div class="font-pixel text-3xl mb-4" :class="item.accent ? 'text-black group-hover:text-black' : 'group-hover:text-blue-500'">[0{{ i + 1 }}]</div>
+          <h4 class="text-2xl font-bold uppercase mb-3" :class="item.accent ? 'text-black group-hover:text-[#F4F4F0]' : ''">{{ item.title }}</h4>
+          <p class="font-medium text-sm leading-relaxed" :class="item.accent ? 'text-black group-hover:text-[#F4F4F0]' : ''">
+            {{ item.text }}
           </p>
         </div>
       </div> 
@@ -296,30 +269,19 @@
         <div class="lg:col-span-7">
           <div class="font-pixel text-xs text-gray-400 mb-4">// TOP_EMPLOYERS & PARTNERS:</div>
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            <div class="border-2 border-white/20 bg-zinc-900 p-6 flex items-center justify-center font-pixel text-xl tracking-widest text-gray-300 hover:border-blue-500 hover:text-white transition-colors">
-              CILIUM
-            </div>
-            <div class="border-2 border-white/20 bg-zinc-900 p-6 flex items-center justify-center font-pixel text-xl tracking-widest text-gray-300 hover:border-blue-500 hover:text-white transition-colors">
-              IBM
-            </div>
-            <div class="border-2 border-white/20 bg-zinc-900 p-6 flex items-center justify-center font-pixel text-xl tracking-widest text-gray-300 hover:border-blue-500 hover:text-white transition-colors">
-              INTEL
-            </div>
-            <div class="border-2 border-white/20 bg-zinc-900 p-6 flex items-center justify-center font-pixel text-xl tracking-widest text-gray-300 hover:border-blue-500 hover:text-white transition-colors">
-              ДІЯ
-            </div>
-            <div class="border-2 border-white/20 bg-zinc-900 p-6 flex items-center justify-center font-pixel text-xl tracking-widest text-gray-300 hover:border-blue-500 hover:text-white transition-colors">
-              MICROSOFT
-            </div>
-            <div class="border-2 border-white/20 bg-zinc-900 p-6 flex items-center justify-center font-pixel text-xl tracking-widest text-gray-300 hover:border-blue-500 hover:text-white transition-colors">
-              N-IX
+            <div
+              v-for="p in partners"
+              :key="p"
+              class="border-2 border-white/20 bg-zinc-900 p-6 flex items-center justify-center font-pixel text-xl tracking-widest text-gray-300 hover:border-blue-500 hover:text-white transition-colors"
+            >
+              {{ p }}
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ЕКСПЕРТНИЙ СКЛАД (ВИКЛАДАЧІ З МОДАЛЬНИМ ВІКНОМ) -->
+    <!-- ЕКСПЕРТНИЙ СКЛАД (ВИКЛАДАЧІ З ПІКСЕЛЬНОЮ КОРОНОЮ ДЛЯ ЗАВКАФЕДРИ) -->
     <div class="py-24 px-6 max-w-[1400px] mx-auto">
       <div class="text-center mb-16">
         <h2 class="font-pixel text-2xl uppercase tracking-widest text-blue-600 mb-4">[ CORE_TEAM ]</h2>
@@ -341,7 +303,7 @@
           <p class="font-mono text-sm text-gray-600">Додай викладачів через панель адміністратора (http://127.0.0.1:8000/admin), і вони автоматично з'являться тут!</p>
         </div>
 
-        <!-- Картка викладача (Кликабельна) -->
+        <!-- Картка викладача -->
         <div 
           v-for="teacher in teachers" 
           :key="teacher.id" 
@@ -359,6 +321,12 @@
               <div v-else class="w-full h-full flex items-center justify-center bg-black text-green-400 font-pixel text-xs">
                 [ NO_PHOTO ]
               </div>
+
+              <!-- Золота піксельна корона для зав. кафедри -->
+              <div v-if="teacher.position && teacher.position.toLowerCase().includes('завідувач')" class="absolute top-2 left-2 bg-yellow-400 border-2 border-black px-2.5 py-1 font-pixel text-xs shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex items-center gap-1.5 z-10">
+                <span>👑</span> <span class="font-bold text-black uppercase">HEAD</span>
+              </div>
+
               <div class="absolute top-2 right-2 bg-black text-white font-pixel text-[10px] px-2 py-1 uppercase border border-white">
                 {{ teacher.degree || 'Expert' }}
               </div>
@@ -390,7 +358,7 @@
       <span class="animate-pulse">Loading... [OK]</span>
     </div>
 
-    <!-- СЕКЦІЯ: НОВИНИ (LATEST_LOGS) -->
+    <!-- СЕКЦІЯ: НОВИНИ (LATEST_LOGS) — максимум 3 -->
     <div class="py-24 px-6 max-w-[1400px] mx-auto bg-[#F4F4F0]">
       <div class="flex justify-between items-end mb-12 border-b-4 border-black pb-4">
         <div>
@@ -402,7 +370,7 @@
         </NuxtLink>
       </div>
 
-      <div class="flex flex-col gap-12">
+      <div class="flex flex-col gap-10">
         <div v-if="pending" class="w-full border-2 border-dashed border-gray-400 py-20 flex flex-col items-center justify-center text-gray-500">
           <div class="font-pixel text-2xl mb-2 animate-pulse">[ FETCHING_DATA_FROM_SERVER... ]</div>
         </div>
@@ -412,46 +380,73 @@
           <div class="font-pixel text-sm">Бекенд не відповідає. Перевір, чи запущений Django (порт 8000).</div>
         </div>
 
-        <article v-else v-for="item in newsItems" :key="item.id" class="group relative grid grid-cols-1 lg:grid-cols-12 gap-8 border-2 border-black p-6 bg-[#F4F4F0] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-1">
-          <div v-if="item.is_pinned" class="absolute -top-4 -right-4 border-2 border-black bg-red-500 text-[#F4F4F0] font-pixel px-3 py-1 uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rotate-3 z-10">
-            [x] Pinned
-          </div>
+        <div v-else-if="latestNews.length === 0" class="border-2 border-dashed border-black p-12 text-center bg-white">
+          <div class="font-pixel text-xl">[ NO_LOGS_YET ]</div>
+        </div>
 
-          <div class="lg:col-span-7 flex flex-col justify-center relative z-0">
-            <div class="font-pixel text-gray-500 mb-4">TIMESTAMP: {{ item.date_posted }} // ADMIN_POST</div>
-            <h4 class="text-3xl lg:text-4xl font-black uppercase tracking-tighter mb-4 group-hover:text-blue-600 transition-colors">
-              {{ item.title }}
-            </h4>
-            
-            <p class="font-mono text-sm md:text-base leading-relaxed border-l-4 border-blue-600 pl-4 mb-6 whitespace-pre-line text-gray-800">
-              {{ item.content }}
-            </p>
-            
-            <button class="self-start font-pixel text-lg text-blue-600 hover:text-black hover:underline uppercase transition-all mt-auto">
-              > Read_More
-            </button>
-          </div>
+        <template v-else>
+          <article
+            v-for="(item, i) in latestNews"
+            :key="item.id"
+            class="group relative grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 border-2 border-black p-5 md:p-6 bg-[#F4F4F0] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-1"
+          >
+            <div v-if="item.is_pinned" class="absolute -top-4 -right-4 border-2 border-black bg-red-500 text-[#F4F4F0] font-pixel px-3 py-1 uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rotate-3 z-10">
+              [x] Pinned
+            </div>
 
-          <div v-if="item.images && item.images.length > 0" 
-               class="lg:col-span-5 grid gap-4 border-2 border-black p-4 bg-white relative z-0 h-fit"
-               :class="item.images.length === 1 ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2'">
-            <img 
-              v-for="img in item.images" 
-              :key="img.id" 
-              :src="img.image.startsWith('http') ? img.image : `http://127.0.0.1:8000${img.image}`" 
-              :alt="item.title" 
-              :class="[
-                'w-full border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer',
-                item.images.length === 1 ? 'h-auto max-h-[400px] object-cover object-center' : 'h-48 md:h-64 object-cover object-top'
-              ]"
-              @click="openModal(img.image.startsWith('http') ? img.image : `http://127.0.0.1:8000${img.image}`)"
-            />
-          </div>
-          
-          <div v-else class="lg:col-span-5 border-2 border-black p-4 bg-[#F4F4F0] relative z-0 flex items-center justify-center min-h-[250px]">
-             <div class="font-pixel text-gray-400">[ NO_IMAGE_ATTACHED ]</div>
-          </div>
-        </article>
+            <!-- Текст: обрізаний, повний варіант на /news -->
+            <div class="lg:col-span-7 flex flex-col justify-center relative z-0">
+              <div class="font-pixel text-gray-500 mb-3 text-sm">
+                LOG_0{{ i + 1 }} // {{ item.date_posted }}
+              </div>
+              <h4 class="text-2xl lg:text-4xl font-black uppercase tracking-tighter mb-4 group-hover:text-blue-600 transition-colors line-clamp-3">
+                {{ item.title }}
+              </h4>
+              <p class="font-mono text-sm md:text-base leading-relaxed border-l-4 border-blue-600 pl-4 mb-6 text-gray-800 line-clamp-4">
+                {{ item.content }}
+              </p>
+              <NuxtLink to="/news" class="self-start font-pixel text-lg text-blue-600 hover:text-black hover:underline uppercase mt-auto">
+                > Read_More
+              </NuxtLink>
+            </div>
+
+            <!-- Фото: як було раніше (одне — у повний розмір, кілька — сітка). Показуємо максимум 2 -->
+            <div
+              class="lg:col-span-5 relative z-0 grid gap-4 border-2 border-black p-4 bg-white h-fit"
+              :class="item.images && item.images.length > 1 ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'"
+            >
+              <template v-if="item.images && item.images.length">
+                <div v-for="(img, k) in item.images.slice(0, 2)" :key="img.id" class="relative">
+                  <button type="button" class="block w-full cursor-zoom-in" :aria-label="`Збільшити фото: ${item.title}`" @click="openModal(imgUrl(img.image))">
+                    <img
+                      :src="imgUrl(img.image)"
+                      :alt="item.title"
+                      loading="lazy"
+                      class="w-full border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
+                      :class="item.images.length === 1 ? 'h-auto max-h-[400px] object-cover object-center' : 'h-48 md:h-64 object-cover object-top'"
+                    />
+                  </button>
+                  <span v-if="k === 1 && item.images.length > 2" class="absolute bottom-3 right-3 bg-black text-white font-pixel text-xs px-2 py-1 border-2 border-white pointer-events-none">
+                    +{{ item.images.length - 2 }} фото
+                  </span>
+                </div>
+              </template>
+              <div v-else class="flex items-center justify-center min-h-[250px] bg-[#F4F4F0]">
+                <span class="font-pixel text-gray-400">[ NO_IMAGE_ATTACHED ]</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Архів: з'являється, коли новин більше ніж 3 -->
+          <NuxtLink
+            v-if="hiddenCount > 0"
+            to="/news"
+            class="flex items-center justify-between gap-4 border-4 border-dashed border-black bg-white px-6 py-5 font-pixel text-lg uppercase hover:bg-black hover:text-[#F4F4F0] hover:border-solid transition-colors group/a"
+          >
+            <span>Ще {{ hiddenCount }} {{ hiddenCount === 1 ? 'запис' : 'записів' }} в архіві</span>
+            <span class="text-2xl group-hover/a:translate-x-2 transition-transform">→</span>
+          </NuxtLink>
+        </template>
       </div>
       
       <NuxtLink to="/news" class="mt-8 md:hidden block text-center border-2 border-black px-6 py-4 uppercase font-bold text-sm bg-black text-[#F4F4F0] shadow-[4px_4px_0px_0px_rgba(199,210,254,1)]">
@@ -473,13 +468,11 @@
     <div v-if="selectedTeacher" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 md:p-8 cursor-pointer backdrop-blur-sm" @click="closeTeacherModal">
       <div class="relative max-w-3xl w-full bg-[#F4F4F0] border-4 border-black p-6 md:p-10 shadow-[12px_12px_0px_0px_rgba(199,210,254,1)] cursor-default max-h-[90vh] overflow-y-auto" @click.stop>
         
-        <!-- Кнопка закриття (тепер всередині і гарантовано на видноті) -->
         <button @click="closeTeacherModal" class="absolute top-4 right-4 bg-red-500 border-2 border-black text-[#F4F4F0] font-pixel px-3 py-1 text-base hover:bg-black transition-colors shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] z-20 cursor-pointer">
           [ X ]
         </button>
 
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start pt-2">
-          <!-- Фото у модалці -->
           <div class="md:col-span-5 border-2 border-black bg-white p-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
             <img 
               v-if="selectedTeacher.photo" 
@@ -491,7 +484,6 @@
             </div>
           </div>
 
-          <!-- Повна інформація -->
           <div class="md:col-span-7 flex flex-col justify-between">
             <div>
               <div class="flex flex-wrap items-center gap-2 mb-3 pr-8">
@@ -526,7 +518,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 
 const { data: newsItems, pending, error } = await useFetch('http://127.0.0.1:8000/api/v1/news/');
 const { data: teachers, pending: teachersPending, error: teachersError } = await useFetch('http://127.0.0.1:8000/api/v1/teachers/');
@@ -535,6 +527,38 @@ const selectedImage = ref(null);
 const selectedTeacher = ref(null);
 const terminalTab = ref('ascii');
 const activeCareer = ref(0);
+
+// ===== НОВИНИ: максимум 3 на головній =====
+const MAX_NEWS = 3;
+
+// Працює і з масивом, і з пагінацією Django ({ results: [...] })
+const allNews = computed(() =>
+  Array.isArray(newsItems.value) ? newsItems.value : (newsItems.value?.results ?? [])
+);
+
+// Закріплені зверху, далі від нових до старіших, обрізаємо до 3
+const latestNews = computed(() =>
+  [...allNews.value]
+    .sort((a, b) =>
+      (Number(!!b.is_pinned) - Number(!!a.is_pinned)) ||
+      (new Date(b.date_posted || 0) - new Date(a.date_posted || 0)))
+    .slice(0, MAX_NEWS)
+);
+
+const hiddenCount = computed(() => Math.max(0, allNews.value.length - MAX_NEWS));
+const imgUrl = (p) => (p.startsWith('http') ? p : `http://127.0.0.1:8000${p}`);
+
+// ===== "ЧОМУ ОБИРАЮТЬ НАС": дані карток (accent — синя картка) =====
+const whyUs = [
+  { title: 'Самореалізація', text: 'Освіта на кафедрі дозволить реалізувати себе в науці, промисловості та бізнесі. Прямий шлях від студента до Senior інженера.' },
+  { title: 'Hardcore Дисципліни', text: 'Телекомунікації, розгортання мереж, бази даних, Штучний Інтелект та IoT. Працюємо з сучасними стеками замість застарілих методичок.' },
+  { title: 'Практична підготовка', accent: true, text: 'Перспективні технологічні рішення на основі апаратного та програмного забезпечення. Пишемо код, піднімаємо контейнери, налаштовуємо сервери.' },
+  { title: 'Експертний склад', text: 'Заняття проводять професори, доценти та провідні розробники сучасних інформаційних систем, які знають продакшен зсередини.' },
+  { title: 'Стандарти ITU', text: 'Навчальний план повністю розроблено за жорсткими стандартами International Telecommunications Union.' },
+  { title: 'Світова інтеграція', text: 'Співпраця з іноземними компаніями та закордонними навчальними закладами. Відкритий шлях до глобального IT-ринку.' }
+];
+
+const partners = ['CILIUM', 'IBM', 'INTEL', 'ДІЯ', 'MICROSOFT', 'N-IX'];
 
 const careers = [
   {

@@ -21,7 +21,6 @@
               <NuxtLink to="/about" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Про нас</NuxtLink>
               <NuxtLink to="/teachers" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Викладачі</NuxtLink>
               <NuxtLink to="/partners" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Наші партнери</NuxtLink>
-              <NuxtLink to="/achievements" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Досягнення</NuxtLink>
               <NuxtLink to="/contacts" class="block px-4 py-3 hover:bg-blue-600 hover:text-[#F4F4F0]">Контакти</NuxtLink>
             </div>
           </div>
@@ -34,7 +33,7 @@
             </button>
             <div class="absolute top-full left-0 w-full h-2"></div>
             <div class="absolute top-[calc(100%+8px)] left-0 hidden group-hover:flex flex-col bg-[#F4F4F0] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-64 z-50">
-              <NuxtLink to="/schedule" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Розклад 2026-2027</NuxtLink>
+              <NuxtLink to="/schedule" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Розклад занять</NuxtLink>
               <NuxtLink to="/conferences" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Конференції</NuxtLink>
               <NuxtLink to="/olympiads" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Олімпіади</NuxtLink>
               <NuxtLink to="/science-activity" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Наукова діяльність</NuxtLink>
@@ -54,30 +53,28 @@
               <NuxtLink to="/invite" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Запрошуємо на навчання</NuxtLink>
               <NuxtLink to="/student-reviews" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Студенти про нас</NuxtLink>
               <NuxtLink to="/study-with-us" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Вивчимо разом</NuxtLink>
-              <NuxtLink to="/admission-rules" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Правила вступу 2026</NuxtLink>
-              <NuxtLink to="/exam-program" class="block px-4 py-3 hover:bg-blue-600 hover:text-[#F4F4F0]">Програма випробування</NuxtLink>
+              <a 
+  href="https://vstup.knu.ua/admission-rules" 
+  target="_blank" 
+  class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]"
+>
+  Правила вступу
+</a>
+                           <a 
+  href="https://drive.google.com/file/d/1ajsZQdVVL51n4AoA751qRbuLlXduAFPb/view" 
+  target="_blank" 
+  class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]"
+>
+  Програма фахового вступного випробовування G5
+</a>
             </div>
           </div>
 
           <!-- Звичайне посилання: НОВИНИ -->
           <NuxtLink to="/news" class="py-2 hover:text-blue-600 transition-colors">Новини</NuxtLink>
 
-          <!-- Дропдаун: ОСВІТНІЙ ПРОЦЕС -->
-          <div class="group relative">
-            <button class="flex items-center gap-1.5 py-2 hover:text-blue-600 transition-colors">
-              <span>Освітній процес</span>
-              <span class="font-pixel text-base mt-0.5">▼</span>
-            </button>
-            <div class="absolute top-full left-0 w-full h-2"></div>
-            <div class="absolute top-[calc(100%+8px)] left-0 hidden group-hover:flex flex-col bg-[#F4F4F0] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-[320px] z-50">
-              <NuxtLink to="/educational-process" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Освітній процес</NuxtLink>
-              <NuxtLink to="/surveys" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Опитування</NuxtLink>
-              <NuxtLink to="/documents" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Нормативно-правові документи</NuxtLink>
-              <NuxtLink to="/qualification-works" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Кваліфікаційні роботи</NuxtLink>
-              <NuxtLink to="/accreditation-masters" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Акредитація магістрів 2023</NuxtLink>
-              <NuxtLink to="/accreditation-bachelors" class="block px-4 py-3 hover:bg-blue-600 hover:text-[#F4F4F0]">Акредитація бакалаврів 2024</NuxtLink>
-            </div>
-          </div>
+          <!-- Звичайне посилання: Освітній процес -->
+          <NuxtLink to="/education-process" class="py-2 hover:text-blue-600 transition-colors">Освітній процес</NuxtLink>
 
           <!-- Дропдаун: НАУКОВА ДІЯЛЬНІСТЬ -->
           <div class="group relative">
