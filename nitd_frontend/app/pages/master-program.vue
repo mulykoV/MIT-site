@@ -126,7 +126,7 @@ const submitFeedback = async () => {
   statusMessage.value = '';
   
   try {
-    const response = await $fetch('http://127.0.0.1:8000/api/v1/feedback/', {
+    const response = await $fetch('https://mit-site-3t9h.vercel.app/api/v1/feedback/', {
       method: 'POST',
       body: form.value
     });
