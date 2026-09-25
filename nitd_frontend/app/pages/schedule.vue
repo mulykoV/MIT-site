@@ -227,7 +227,7 @@ const courses = [
 const activeCourse = ref('c3');
 
 // 3. ПІДКЛЮЧЕННЯ ДО DJANGO API
-const { data: dbSchedule, pending, error } = await useFetch('http://127.0.0.1:8000/api/v1/schedule/', {
+const { data: dbSchedule, pending, error } = await useFetch('https://mit-site-3t9h.vercel.app/api/v1/schedule/', {
   default: () => []
 });
 
