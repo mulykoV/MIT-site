@@ -146,7 +146,7 @@ const categories = [
 ];
 
 // Отримуємо дані з Django API
-const { data: galleryItems, pending } = await useFetch('http://127.0.0.1:8000/api/v1/gallery/');
+const { data: galleryItems, pending } = await useFetch('https://mit-site-3t9h.vercel.app/api/v1/gallery/');
 
 // --- ЛОГІКА РАНДОМНОГО СПОГАДУ (SPOTLIGHT) ---
 const randomMemory = ref(null);
