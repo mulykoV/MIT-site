@@ -182,7 +182,7 @@
 import { ref, computed } from 'vue';
 
 // Підключення до API
-const { data: dbConferences, pending, error } = await useFetch('http://127.0.0.1:8000/api/v1/conferences/', {
+const { data: dbConferences, pending, error } = await useFetch('https://mit-site-3t9h.vercel.app/api/v1/conferences/', {
   default: () => []
 });
 
