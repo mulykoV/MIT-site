@@ -211,7 +211,7 @@
 import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue';
 
 // Ендпоїнт із бекенду (див. urls.py: path('education/', ...))
-const { data: sections, pending, error } = await useFetch('http://127.0.0.1:8000/api/v1/education/');
+const { data: sections, pending, error } = await useFetch('https://mit-site-3t9h.vercel.app/api/v1/education/');
 
 // ===== Головні сторінки (блоки зверху) =====
 // Якщо файли лежать не в корені pages/, змін значення `to`.
@@ -267,7 +267,7 @@ const activeSection = computed(() => {
 });
 
 // Перегляд документів (сертифікатів) з навігацією
-const imgUrl = (p) => (p.startsWith('http') ? p : `http://127.0.0.1:8000${p}`);
+const imgUrl = (p) => (p.startsWith('http') ? p : `https://mit-site-3t9h.vercel.app${p}`);
 const images = computed(() => activeSection.value?.images ?? []);
 const imageIndex = ref(null);
 const currentImage = computed(() => (imageIndex.value === null ? null : images.value[imageIndex.value] ?? null));
