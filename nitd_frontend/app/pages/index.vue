@@ -300,7 +300,7 @@
       <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <div v-if="!teachers || teachers.length === 0" class="col-span-full border-2 border-dashed border-black p-12 text-center bg-white">
           <div class="font-pixel text-xl mb-2">[ NO_TEACHERS_IN_DB ]</div>
-          <p class="font-mono text-sm text-gray-600">Додай викладачів через панель адміністратора (http://127.0.0.1:8000/admin), і вони автоматично з'являться тут!</p>
+          <p class="font-mono text-sm text-gray-600">Додай викладачів через панель адміністратора (https://mit-site-3t9h.vercel.app/admin), і вони автоматично з'являться тут!</p>
         </div>
 
         <!-- Картка викладача -->
@@ -314,7 +314,7 @@
             <div class="w-full h-72 border-b-2 border-black bg-gray-200 relative overflow-hidden">
               <img 
                 v-if="teacher.photo" 
-                :src="teacher.photo.startsWith('http') ? teacher.photo : `http://127.0.0.1:8000${teacher.photo}`" 
+                :src="teacher.photo.startsWith('http') ? teacher.photo : `https://mit-site-3t9h.vercel.app${teacher.photo}`" 
                 :alt="`${teacher.last_name} ${teacher.first_name}`" 
                 class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
               />
@@ -476,7 +476,7 @@
           <div class="md:col-span-5 border-2 border-black bg-white p-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
             <img 
               v-if="selectedTeacher.photo" 
-              :src="selectedTeacher.photo.startsWith('http') ? selectedTeacher.photo : `http://127.0.0.1:8000${selectedTeacher.photo}`" 
+              :src="selectedTeacher.photo.startsWith('http') ? selectedTeacher.photo : `https://mit-site-3t9h.vercel.app${selectedTeacher.photo}`" 
               class="w-full h-72 md:h-80 object-cover object-top border-2 border-black" 
             />
             <div v-else class="w-full h-72 md:h-80 bg-black text-green-400 font-pixel flex items-center justify-center text-xs">
@@ -520,8 +520,8 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 
-const { data: newsItems, pending, error } = await useFetch('http://127.0.0.1:8000/api/v1/news/');
-const { data: teachers, pending: teachersPending, error: teachersError } = await useFetch('http://127.0.0.1:8000/api/v1/teachers/');
+const { data: newsItems, pending, error } = await useFetch('https://mit-site-3t9h.vercel.app/api/v1/news/');
+const { data: teachers, pending: teachersPending, error: teachersError } = await useFetch('https://mit-site-3t9h.vercel.app/api/v1/teachers/');
 
 const selectedImage = ref(null);
 const selectedTeacher = ref(null);
@@ -546,7 +546,7 @@ const latestNews = computed(() =>
 );
 
 const hiddenCount = computed(() => Math.max(0, allNews.value.length - MAX_NEWS));
-const imgUrl = (p) => (p.startsWith('http') ? p : `http://127.0.0.1:8000${p}`);
+const imgUrl = (p) => (p.startsWith('http') ? p : `https://mit-site-3t9h.vercel.app${p}`);
 
 // ===== "ЧОМУ ОБИРАЮТЬ НАС": дані карток (accent — синя картка) =====
 const whyUs = [
