@@ -136,7 +136,7 @@
 <script setup>
 import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue';
 
-const API = 'http://127.0.0.1:8000';
+const API = 'https://mit-site-3t9h.vercel.app';
 const { data, pending, error, refresh } = await useFetch(`${API}/api/v1/news/`, { default: () => [] });
 
 const all = computed(() => (Array.isArray(data.value) ? data.value : (data.value?.results ?? [])));
