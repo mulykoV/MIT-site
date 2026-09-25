@@ -9,7 +9,7 @@
           <p class="tag font-pixel">[ АРХІВ ДОКУМЕНТІВ ]</p>
           <h1 class="title">Силабуси та<br /><span class="title__mark">РПНД</span></h1>
         </div>
-        <NuxtLink to="/education" class="btn font-pixel">← До освітнього процесу</NuxtLink>
+        <NuxtLink to="/education-process" class="btn font-pixel">← До освітнього процесу</NuxtLink>
       </header>
 
       <!-- БАКАЛАВРАТ / МАГІСТРАТУРА -->

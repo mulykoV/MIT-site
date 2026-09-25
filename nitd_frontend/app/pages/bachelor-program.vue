@@ -17,7 +17,7 @@
         </div>
         
         <div class="flex flex-col gap-2 shrink-0">
-          <NuxtLink to="/education" class="font-pixel text-xs bg-white text-black px-6 py-3 uppercase border-4 border-black hover:bg-red-600 hover:text-white transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-center">
+          <NuxtLink to="/education-process" class="font-pixel text-xs bg-white text-black px-6 py-3 uppercase border-4 border-black hover:bg-red-600 hover:text-white transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-center">
             ← НАЗАД ДО БАЗИ
           </NuxtLink>
         </div>

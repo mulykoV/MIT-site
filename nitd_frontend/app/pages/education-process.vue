@@ -217,7 +217,7 @@ const { data: sections, pending, error } = await useFetch('https://mit-site-3t9h
 // Якщо файли лежать не в корені pages/, змін значення `to`.
 const featured = [
   {
-    to: '/bachelor-program',
+    to: '/program-description',
     tag: 'БАКАЛАВРАТ',
     title: 'Освітня програма (бакалавр)',
     text: 'Освітньо-професійна програма першого (бакалаврського) рівня.',
@@ -233,7 +233,7 @@ const featured = [
     icon: 'M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5',
   },
   {
-    to: '/program-description',
+    to: '/bachelor-program',
     tag: 'ОПИС ПРОГРАМИ',
     title: 'Опис освітньої програми',
     text: 'Опис програм, навчальні плани та структура підготовки.',
