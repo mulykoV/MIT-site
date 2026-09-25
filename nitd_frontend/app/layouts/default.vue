@@ -9,7 +9,7 @@
 
         <!-- Навігація (Desktop) -->
         <nav class="hidden md:flex gap-4 lg:gap-8 font-bold uppercase text-xs lg:text-sm tracking-widest relative items-center">
-          <!-- Твої десктопні дропдауни залишаються без змін -->
+          <!-- ПРО НАС -->
           <div class="group relative">
             <button class="flex items-center gap-1.5 py-2 hover:text-blue-600 transition-colors">
               <span>Про нас</span><span class="font-pixel text-base mt-0.5">▼</span>
@@ -22,6 +22,8 @@
               <NuxtLink to="/contacts" class="block px-4 py-3 hover:bg-blue-600 hover:text-[#F4F4F0]">Контакти</NuxtLink>
             </div>
           </div>
+          
+          <!-- СТУДЕНТАМ -->
           <div class="group relative">
             <button class="flex items-center gap-1.5 py-2 hover:text-blue-600 transition-colors">
               <span>Студентам</span><span class="font-pixel text-base mt-0.5">▼</span>
@@ -32,8 +34,25 @@
               <NuxtLink to="/olympiads" class="block px-4 py-3 hover:bg-blue-600 hover:text-[#F4F4F0]">Олімпіади</NuxtLink>
             </div>
           </div>
-          <!-- Інші десктопні лінки -->
+          
+          <!-- ВСТУПНИКАМ -->
+          <div class="group relative">
+            <button class="flex items-center gap-1.5 py-2 hover:text-blue-600 transition-colors">
+              <span>Вступникам</span><span class="font-pixel text-base mt-0.5">▼</span>
+            </button>
+            <div class="absolute top-[calc(100%+8px)] left-0 hidden group-hover:flex flex-col bg-[#F4F4F0] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-72 z-50">
+              <NuxtLink to="/invite" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Запрошуємо на навчання</NuxtLink>
+              <NuxtLink to="/student-reviews" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Студенти про нас</NuxtLink>
+              <NuxtLink to="/study-with-us" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Вивчимо разом</NuxtLink>
+              <a href="https://vstup.knu.ua/admission-rules" target="_blank" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Правила вступу</a>
+              <a href="https://drive.google.com/file/d/1ajsZQdVVL51n4AoA751qRbuLlXduAFPb/view" target="_blank" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Програма фахового вступного випробовування G5</a>
+            </div>
+          </div>
+
+          <!-- Інші лінки -->
           <NuxtLink to="/news" class="py-2 hover:text-blue-600 transition-colors">Новини</NuxtLink>
+          <NuxtLink to="/education-process" class="py-2 hover:text-blue-600 transition-colors">Освітній процес</NuxtLink>
+          <NuxtLink to="/science-edu-process" class="py-2 hover:text-blue-600 transition-colors">Наукова діяльність</NuxtLink>
           <NuxtLink to="/gallery" class="py-2 hover:text-blue-600 transition-colors">Галерея</NuxtLink>
         </nav>
 
@@ -54,7 +73,7 @@
       class="md:hidden fixed inset-0 z-[100] bg-black text-[#F4F4F0] flex flex-col overflow-y-auto"
     >
       <!-- Шапка оверлею -->
-      <div class="flex justify-between items-center p-6 border-b-2 border-gray-800 bg-gray-900 sticky top-0">
+      <div class="flex justify-between items-center p-6 border-b-2 border-gray-800 bg-gray-900 sticky top-0 z-10">
         <div class="font-pixel text-2xl text-green-400">~/navigation $</div>
         <button 
           @click="isMenuOpen = false" 
@@ -139,9 +158,15 @@
           </div>
         </div>
 
-        <!-- Одиночні посилання (Без підменю) -->
+        <!-- Одиночні посилання -->
         <NuxtLink @click="isMenuOpen = false" to="/news" class="block font-black uppercase text-xl py-3 flex items-center gap-3 hover:text-blue-400 transition-colors">
           <span class="font-pixel text-2xl text-gray-600">[*]</span> НОВИНИ
+        </NuxtLink>
+        <NuxtLink @click="isMenuOpen = false" to="/education-process" class="block font-black uppercase text-xl py-3 flex items-center gap-3 hover:text-blue-400 transition-colors">
+          <span class="font-pixel text-2xl text-gray-600">[*]</span> ОСВІТНІЙ ПРОЦЕС
+        </NuxtLink>
+        <NuxtLink @click="isMenuOpen = false" to="/science-edu-process" class="block font-black uppercase text-xl py-3 flex items-center gap-3 hover:text-blue-400 transition-colors">
+          <span class="font-pixel text-2xl text-gray-600">[*]</span> НАУКОВА ДІЯЛЬНІСТЬ
         </NuxtLink>
         <NuxtLink @click="isMenuOpen = false" to="/gallery" class="block font-black uppercase text-xl py-3 flex items-center gap-3 hover:text-blue-400 transition-colors">
           <span class="font-pixel text-2xl text-gray-600">[*]</span> ГАЛЕРЕЯ
@@ -150,13 +175,102 @@
       </nav>
     </div>
 
-    <!-- Основний контент -->
     <main>
       <slot />
     </main>
 
-    <!-- Твій Футер -->
-    <footer>...</footer>
+    <!-- НОВИЙ БРУТАЛЬНИЙ ФУТЕР -->
+    <footer class="mt-20 border-t-2 border-black bg-[#F4F4F0] text-black">
+      
+      <!-- Стрічка партнерів (Marquee) -->
+      <div class="border-b-2 border-black bg-blue-600 text-[#F4F4F0] py-3 overflow-hidden flex whitespace-nowrap font-pixel text-xl uppercase tracking-widest">
+        <div class="animate-marquee inline-block min-w-full">
+          [ ПАРТНЕРИ ] IEEE * НАЦІОНАЛЬНИЙ УНІВЕРСИТЕТ ОБОРОНИ * LIFECELL * HUAWEI * 
+          [ ПАРТНЕРИ ] IEEE * НАЦІОНАЛЬНИЙ УНІВЕРСИТЕТ ОБОРОНИ * LIFECELL * HUAWEI * 
+        </div>
+      </div>
+
+      <!-- Основна сітка футера -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y-2 md:divide-y-0 md:divide-x-2 divide-black">
+        
+        <!-- 1. Бренд та Університет -->
+        <div class="p-8 flex flex-col justify-between bg-black text-[#F4F4F0]">
+          <div>
+            <div class="font-pixel text-4xl text-blue-500 mb-6">[MIT_DEPT]</div>
+            <p class="font-bold text-sm uppercase leading-relaxed text-gray-300">
+              Київський національний<br/>університет імені Тараса Шевченка
+            </p>
+            <p class="font-bold text-sm uppercase leading-relaxed mt-4">
+              Факультет інформаційних технологій
+            </p>
+          </div>
+        </div>
+
+        <!-- 2. Локація -->
+        <div class="p-8 flex flex-col justify-between">
+          <div>
+            <h4 class="font-pixel text-xl text-gray-500 mb-6">// ЛОКАЦІЯ</h4>
+            <p class="font-bold text-lg uppercase leading-tight mb-2">
+              Україна, м. Київ
+            </p>
+            <p class="font-bold text-lg uppercase leading-tight">
+              вул. Богдана<br/>Гаврилишина, 24
+            </p>
+            <p class="font-pixel text-sm text-gray-500 mt-4">Індекс: 04116</p>
+          </div>
+          <a href="https://maps.google.com/?q=Богдана+Гаврилишина+24+Київ" target="_blank" class="mt-8 inline-block border-2 border-black bg-[#c7d2fe] text-center py-3 font-bold uppercase hover:bg-black hover:text-[#F4F4F0] transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+            Відкрити Мапу ↗
+          </a>
+        </div>
+
+        <!-- 3. Контакти -->
+        <div class="p-8">
+          <h4 class="font-pixel text-xl text-gray-500 mb-6">// ЗВ'ЯЗОК</h4>
+          <ul class="space-y-6 font-bold text-sm uppercase">
+            <li class="flex flex-col group">
+              <span class="font-pixel text-xs text-gray-500 mb-1">Email_Address:</span>
+              <a href="mailto:nit.fit.knu@gmail.com" class="text-base group-hover:text-blue-600 transition-colors">nit.fit.knu@gmail.com</a>
+            </li>
+            <li class="flex flex-col">
+              <span class="font-pixel text-xs text-gray-500 mb-1">Завідувач кафедри:</span>
+              <span class="text-base">+380 (68) 124 2846</span>
+            </li>
+            <li class="flex flex-col">
+              <span class="font-pixel text-xs text-gray-500 mb-1">Приймальна комісія:</span>
+              <span class="text-base">+380 (44) 481 4582</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 4. Соцмережі -->
+        <div class="p-8 flex flex-col justify-between bg-[#F4F4F0]">
+          <div>
+            <h4 class="font-pixel text-xl text-gray-500 mb-6">// МЕРЕЖА</h4>
+            <div class="flex flex-col gap-4 font-black text-2xl uppercase">
+              <a href="https://www.instagram.com/mit_fit_knu" class="flex items-center gap-2 hover:text-blue-600 transition-colors group">
+                <span class="opacity-0 group-hover:opacity-100 font-pixel text-blue-600 transition-opacity">></span>
+                Instagram
+              </a>
+              <a href="https://www.facebook.com" class="flex items-center gap-2 hover:text-blue-600 transition-colors group">
+                <span class="opacity-0 group-hover:opacity-100 font-pixel text-blue-600 transition-opacity">></span>
+                Facebook
+              </a>
+              <a href="https://www.tiktok.com/@mit_fit_knu" class="flex items-center gap-2 hover:text-blue-600 transition-colors group">
+                <span class="opacity-0 group-hover:opacity-100 font-pixel text-blue-600 transition-opacity">></span>
+                TikTok
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Копірайт -->
+      <div class="border-t-2 border-black px-6 py-3 flex justify-between items-center font-pixel text-sm uppercase bg-black text-[#F4F4F0]">
+        <span>© 2026 MIT_DEPT. Всі права захищено.</span>
+        <span class="animate-pulse">SYS_HALTED _</span>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -164,15 +278,12 @@
 import { ref, watch } from 'vue'
 
 const isMenuOpen = ref(false)
-const activeSection = ref(null) // Зберігає ID відкритої категорії
+const activeSection = ref(null)
 
-// Функція для перемикання категорій
 const toggleSection = (section) => {
-  // Якщо клікаємо на вже відкриту — закриваємо її, інакше відкриваємо нову
   activeSection.value = activeSection.value === section ? null : section
 }
 
-// Блокуємо скрол сторінки під меню, коли воно відкрите
 watch(isMenuOpen, (isOpen) => {
   if (import.meta.client) {
     if (isOpen) {
@@ -183,3 +294,23 @@ watch(isMenuOpen, (isOpen) => {
   }
 })
 </script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&family=VT323&display=swap');
+
+body { 
+  font-family: 'Space Grotesk', sans-serif; 
+}
+.font-pixel { 
+  font-family: 'VT323', monospace; 
+}
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 15s linear infinite;
+  min-width: 200%;
+}
+</style>
