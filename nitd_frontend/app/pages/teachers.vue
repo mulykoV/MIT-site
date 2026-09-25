@@ -67,7 +67,7 @@
           <div class="relative w-full aspect-square border-b-4 border-black overflow-hidden flex-shrink-0 bg-white">
             <img 
               v-if="teacher.photo" 
-              :src="teacher.photo.startsWith('http') ? teacher.photo : `http://127.0.0.1:8000${teacher.photo}`" 
+              :src="teacher.photo.startsWith('http') ? teacher.photo : `https://mit-site-3t9h.vercel.app${teacher.photo}`" 
               :alt="teacher.last_name"
               class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
             />
@@ -122,7 +122,7 @@
             <div class="border-4 border-black bg-white p-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
               <img 
                 v-if="selectedTeacher.photo" 
-                :src="selectedTeacher.photo.startsWith('http') ? selectedTeacher.photo : `http://127.0.0.1:8000${selectedTeacher.photo}`" 
+                :src="selectedTeacher.photo.startsWith('http') ? selectedTeacher.photo : `https://mit-site-3t9h.vercel.app${selectedTeacher.photo}`" 
                 class="w-full aspect-[3/4] object-cover object-top border-2 border-black" 
               />
               <div v-else class="w-full aspect-[3/4] bg-black text-green-400 font-pixel flex items-center justify-center text-xs">
@@ -178,7 +178,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 
-const { data: teachers, pending, error } = await useFetch('http://127.0.0.1:8000/api/v1/teachers/');
+const { data: teachers, pending, error } = await useFetch('https://mit-site-3t9h.vercel.app/api/v1/teachers/');
 
 const teachersCount = computed(() => {
   return teachers.value ? teachers.value.length : 0;
