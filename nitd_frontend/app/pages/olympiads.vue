@@ -124,7 +124,7 @@
 
 <script setup>
 // Отримуємо дані з нашого нового ендпоінту Олімпіад
-const { data: dbOlympiads, pending, error } = await useFetch('http://127.0.0.1:8000/api/v1/olympiads/', {
+const { data: dbOlympiads, pending, error } = await useFetch('https://mit-site-3t9h.vercel.app/api/v1/olympiads/', {
   default: () => []
 });
 
