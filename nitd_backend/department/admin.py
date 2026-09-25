@@ -1,6 +1,6 @@
 from django.contrib import admin
 import nested_admin
-from .models import Teacher, Course, News, NewsImage, Schedule, ScheduleSync, Conference, Olympiad, Textbook, Curator, EduSection, EduGroup, EduLink, EduImage
+from .models import Teacher, Course, News, NewsImage, Schedule, ScheduleSync, Conference, Olympiad, Textbook, Curator, EduSection, EduGroup, EduLink, EduImage, ProgramFeedback, GalleryItem
 from .parser import sync_pubhtml_schedule
 
 # Це дозволяє додавати фотографії прямо на сторінці створення новини
@@ -22,8 +22,17 @@ class TeacherAdmin(admin.ModelAdmin):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('title', 'study_year', 'semester')
-    list_filter = ('study_year',)
+    # Оновлені поля для відображення в таблиці
+    list_display = ('title', 'degree', 'category', 'subcategory')
+    
+    # Оновлені фільтри збоку
+    list_filter = ('degree', 'category', 'subcategory')
+    
+    # Пошук по назві та викладачах
+    search_fields = ('title', 'teachers_text')
+    
+    # Зручний віджет для вибору викладачів (ManyToMany)
+    filter_horizontal = ('teachers',)
 
 @admin.register(Schedule)
 class ScheduleAdmin(admin.ModelAdmin):
@@ -100,3 +109,14 @@ class EduSectionAdmin(nested_admin.NestedModelAdmin):
     list_editable = ("order", "show_in_menu", "is_published")
     prepopulated_fields = {"slug": ("title",)}
     inlines = [ImageInline, GroupInline]
+
+@admin.register(ProgramFeedback)
+class ProgramFeedbackAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'created_at')
+    readonly_fields = ('name', 'email', 'message', 'created_at')
+
+@admin.register(GalleryItem)
+class GalleryItemAdmin(admin.ModelAdmin):
+    list_display = ('title', 'category', 'is_published', 'created_at')
+    list_filter = ('category', 'is_published')
+    search_fields = ('title',)

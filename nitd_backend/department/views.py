@@ -1,8 +1,8 @@
 from rest_framework import viewsets
-from rest_framework.generics import ListAPIView
-from .models import News, Teacher, Schedule, Conference, Olympiad, Textbook, Curator, EduSection
+from rest_framework.generics import ListAPIView, CreateAPIView
+from .models import News, Teacher, Schedule, Conference, Olympiad, Textbook, Curator, EduSection, ProgramFeedback, GalleryItem
 from .serializers import (NewsSerializer, TeacherSerializer, ScheduleSerializer, ConferenceSerializer,
-                          OlympiadSerializer, TextbookSerializer, CuratorSerializer, SectionSer)
+                          OlympiadSerializer, TextbookSerializer, CuratorSerializer, SectionSer, ProgramFeedbackSerializer, GalleryItemSerializer)
 
 
 class NewsViewSet(viewsets.ReadOnlyModelViewSet):
@@ -42,3 +42,12 @@ class EduSectionList(ListAPIView):
     def get_queryset(self):
         return (EduSection.objects.filter(is_published=True)
                 .prefetch_related("groups__links", "images"))
+
+class ProgramFeedbackCreateView(CreateAPIView):
+    queryset = ProgramFeedback.objects.all()
+    serializer_class = ProgramFeedbackSerializer
+
+class GalleryItemListView(ListAPIView):
+    # Виводимо тільки ті фото, де стоїть галочка "Опубліковано"
+    queryset = GalleryItem.objects.filter(is_published=True)
+    serializer_class = GalleryItemSerializer

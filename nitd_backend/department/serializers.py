@@ -2,7 +2,8 @@ from rest_framework import serializers
 from .models import (
     News, NewsImage, Teacher, Schedule, Course, 
     Conference, Olympiad, Textbook, Curator, 
-    EduSection, EduGroup, EduLink, EduImage
+    EduSection, EduGroup, EduLink, EduImage,
+    ProgramFeedback, GalleryItem
 )
 
 class NewsImageSerializer(serializers.ModelSerializer):
@@ -112,3 +113,14 @@ class SectionSer(serializers.ModelSerializer):
     class Meta:
         model = EduSection
         fields = ("id", "title", "slug", "intro", "show_in_menu", "groups", "images")
+
+class ProgramFeedbackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProgramFeedback
+        fields = ['name', 'email', 'message']
+
+class GalleryItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GalleryItem
+        # Віддаємо тільки потрібні поля (is_published фронтенду знати не обов'язково)
+        fields = ['id', 'title', 'image', 'category', 'created_at']

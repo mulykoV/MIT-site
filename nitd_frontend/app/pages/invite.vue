@@ -21,7 +21,6 @@
             <span class="title__mark">частиною мережі</span>
           </h1>
         </div>
-        <NuxtLink to="/" class="btn btn--light">← На головну</NuxtLink>
       </header>
 
       <!-- ІНФО -->

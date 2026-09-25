@@ -28,7 +28,7 @@
         
         <!-- Ліва частина: Основний опис -->
         <div class="lg:col-span-8 bg-white border-4 border-black p-8 md:p-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-center relative overflow-hidden group">
-          <div class="absolute -right-10 -bottom-10 text-[200px] opacity-5 font-black pointer-events-none group-hover:scale-110 transition-transform text-black">172</div>
+          <div class="absolute -right-10 -bottom-10 text-[200px] opacity-5 font-black pointer-events-none group-hover:scale-110 transition-transform text-black">G5</div>
           
           <div class="font-pixel text-xs text-gray-500 mb-6 border-b-2 border-dashed border-gray-300 pb-2 uppercase">
             // PROGRAM_OVERVIEW
@@ -49,7 +49,7 @@
           <!-- Спеціальність -->
           <div class="bg-black text-white border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(220,38,38,1)] hover:-translate-y-1 transition-transform flex flex-col justify-center h-1/2">
             <div class="font-pixel text-[10px] text-red-500 mb-2 uppercase">СПЕЦІАЛЬНІСТЬ</div>
-            <div class="text-6xl font-black mb-2 text-white">172</div>
+            <div class="text-6xl font-black mb-2 text-white">G5</div>
             <div class="font-mono font-bold text-lg uppercase text-zinc-300">
               Телекомунікації та радіотехніка
             </div>
@@ -58,7 +58,7 @@
           <!-- Галузь -->
           <div class="bg-zinc-200 border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-transform flex flex-col justify-center h-1/2">
             <div class="font-pixel text-[10px] text-gray-600 mb-2 uppercase">ГАЛУЗЬ ЗНАНЬ</div>
-            <div class="text-5xl font-black mb-2 text-black">17</div>
+            <div class="text-5xl font-black mb-2 text-black">G</div>
             <div class="font-mono font-bold text-lg uppercase text-black">
               Електроніка та телекомунікації
             </div>

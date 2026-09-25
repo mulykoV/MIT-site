@@ -14,12 +14,41 @@
             ОСВІТНІЙ <br><span class="text-white bg-black px-3 mt-2 inline-block shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">ПРОЦЕС</span>
           </h1>
         </div>
-        
-        <div class="flex flex-col gap-2 shrink-0">
-          <NuxtLink to="/" class="font-pixel text-xs bg-white text-black px-6 py-3 uppercase border-4 border-black hover:bg-blue-600 hover:text-white transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-center">
-            ← НА ГОЛОВНУ
+      </div>
+
+      <!-- ГОЛОВНІ СТОРІНКИ (блоки) -->
+      <section class="feat" aria-labelledby="feat-title">
+        <div class="feat__head">
+          <p class="feat__kicker font-pixel">// MAIN_PAGES</p>
+          <h2 id="feat-title" class="feat__title">Головне</h2>
+          <p class="feat__sub">Основні сторінки освітнього процесу: обери потрібну.</p>
+        </div>
+
+        <div class="feat__grid">
+          <NuxtLink
+            v-for="(f, i) in featured"
+            :key="f.to"
+            :to="f.to"
+            class="fc"
+            :style="{ '--c': f.color, '--on': f.on }"
+          >
+            <span class="fc__n font-pixel" aria-hidden="true">0{{ i + 1 }}</span>
+            <span class="fc__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path :d="f.icon" /></svg>
+            </span>
+            <span class="fc__tag font-pixel">[ {{ f.tag }} ]</span>
+            <h3 class="fc__t">{{ f.title }}</h3>
+            <p class="fc__p">{{ f.text }}</p>
+            <span class="fc__go font-pixel">Відкрити <i aria-hidden="true">→</i></span>
           </NuxtLink>
         </div>
+      </section>
+
+      <!-- Розділювач -->
+      <div class="sep" role="separator">
+        <span class="sep__line"></span>
+        <span class="sep__txt font-pixel">// ДОКУМЕНТИ ТА ПОСИЛАННЯ</span>
+        <span class="sep__line"></span>
       </div>
 
       <!-- СТАТУС ЗАВАНТАЖЕННЯ -->
@@ -88,12 +117,13 @@
                   
                   <!-- СІТКА ПОСИЛАНЬ -->
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <a 
-                      v-for="link in group.links" 
+                    <component
+                      :is="link.href ? 'a' : 'div'"
+                      v-for="link in group.links"
                       :key="link.id"
-                      :href="link.href" 
-                      target="_blank"
+                      v-bind="link.href ? { href: link.href, target: '_blank', rel: 'noopener' } : { title: 'Посилання ще не додано' }"
                       class="flex flex-col bg-white border-4 border-black p-5 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:translate-x-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all group"
+                      :class="{ 'opacity-60': !link.href }"
                     >
                       <div class="flex justify-between items-start mb-3 gap-4">
                         <div class="font-pixel text-[10px] text-white bg-black px-2 py-1 uppercase border border-black group-hover:bg-blue-600 transition-colors">
@@ -111,7 +141,7 @@
                       <div class="mt-auto pt-4 flex justify-end">
                         <svg class="w-6 h-6 text-black group-hover:text-blue-600 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                       </div>
-                    </a>
+                    </component>
                   </div>
                   
                 </div>
@@ -123,25 +153,22 @@
                   <span class="text-yellow-500 font-pixel">@</span>
                   ДОКУМЕНТИ ТА СЕРТИФІКАТИ
                 </h3>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  <div 
-                    v-for="img in activeSection.images" 
+                <div class="gal">
+                  <button
+                    v-for="(img, i) in activeSection.images"
                     :key="img.id"
-                    @click="openImageModal(img)"
-                    class="relative aspect-[3/4] border-4 border-black bg-zinc-200 cursor-pointer shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(37,99,235,1)] transition-all group overflow-hidden"
+                    type="button"
+                    class="gal__item"
+                    :aria-label="`Відкрити: ${img.caption || 'документ'}`"
+                    @click="openImageModal(i)"
                   >
-                    <img 
-                      :src="img.image.startsWith('http') ? img.image : `http://127.0.0.1:8000${img.image}`" 
-                      :alt="img.caption"
-                      class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
-                    />
-                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <span class="bg-white text-black font-pixel text-xs px-3 py-2 uppercase border-2 border-black">VIEW</span>
-                    </div>
-                    <div v-if="img.caption" class="absolute bottom-0 left-0 w-full bg-black text-white font-pixel text-[8px] p-2 truncate">
-                      {{ img.caption }}
-                    </div>
-                  </div>
+                    <span class="gal__frame">
+                      <img :src="imgUrl(img.image)" :alt="img.caption || 'Документ'" loading="lazy" />
+                      <span class="gal__no font-pixel">DOC_0{{ i + 1 }}</span>
+                      <span class="gal__zoom" aria-hidden="true"><b class="font-pixel">Дивитись ⤢</b></span>
+                    </span>
+                    <span class="gal__cap font-pixel">{{ img.caption || 'Документ' }}</span>
+                  </button>
                 </div>
               </div>
 
@@ -152,25 +179,26 @@
       </div>
     </div>
 
-    <!-- МОДАЛЬНЕ ВІКНО ДЛЯ СЕРТИФІКАТІВ -->
+    <!-- ПЕРЕГЛЯД ДОКУМЕНТІВ (lightbox) -->
     <Teleport to="body">
-      <Transition name="modal">
-        <div v-if="selectedImage" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 md:p-8 cursor-pointer backdrop-blur-sm" @click="closeImageModal">
-          <div class="relative max-w-5xl w-full max-h-[90vh] bg-[#F4F4F0] border-4 border-black p-4 shadow-[12px_12px_0px_0px_rgba(250,204,21,1)] cursor-default flex flex-col items-center" @click.stop>
-            
-            <button @click="closeImageModal" class="absolute -top-6 -right-6 md:-top-8 md:-right-8 bg-red-500 border-2 border-black text-white font-pixel px-4 py-2 text-lg md:text-2xl hover:bg-black transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-10 cursor-pointer">
-              X
-            </button>
-            
-            <img 
-              :src="selectedImage.image.startsWith('http') ? selectedImage.image : `http://127.0.0.1:8000${selectedImage.image}`" 
-              class="max-w-full max-h-[75vh] object-contain border-2 border-black bg-white" 
-            />
-            
-            <div v-if="selectedImage.caption" class="w-full mt-4 bg-black text-white font-mono text-center p-3 text-lg uppercase font-bold border-2 border-black">
-              {{ selectedImage.caption }}
+      <Transition name="lb">
+        <div v-if="currentImage" class="lb" role="dialog" aria-modal="true" aria-label="Перегляд документа" @click.self="closeImageModal">
+          <div class="lb__box">
+            <header class="lb__bar">
+              <span class="lb__cnt font-pixel">DOC {{ imageIndex + 1 }} / {{ images.length }}</span>
+              <div class="lb__actions">
+                <a :href="imgUrl(currentImage.image)" target="_blank" rel="noopener" class="lb__btn lb__btn--open font-pixel">Оригінал ↗</a>
+                <button type="button" class="lb__btn lb__btn--x font-pixel" aria-label="Закрити" @click="closeImageModal">X</button>
+              </div>
+            </header>
+
+            <div class="lb__stage">
+              <button v-if="images.length > 1" type="button" class="lb__nav lb__nav--l font-pixel" aria-label="Попередній документ" @click="stepImage(-1)">←</button>
+              <img :src="imgUrl(currentImage.image)" :alt="currentImage.caption || 'Документ'" class="lb__img" />
+              <button v-if="images.length > 1" type="button" class="lb__nav lb__nav--r font-pixel" aria-label="Наступний документ" @click="stepImage(1)">→</button>
             </div>
-            
+
+            <footer v-if="currentImage.caption" class="lb__cap">{{ currentImage.caption }}</footer>
           </div>
         </div>
       </Transition>
@@ -180,10 +208,47 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue';
 
-// Увага: перевір свій URL до API. Зазвичай це щось типу /api/v1/edu-sections/
-const { data: sections, pending, error } = await useFetch('http://127.0.0.1:8000/api/v1/edu-sections/');
+// Ендпоїнт із бекенду (див. urls.py: path('education/', ...))
+const { data: sections, pending, error } = await useFetch('http://127.0.0.1:8000/api/v1/education/');
+
+// ===== Головні сторінки (блоки зверху) =====
+// Якщо файли лежать не в корені pages/, змін значення `to`.
+const featured = [
+  {
+    to: '/bachelor-program',
+    tag: 'БАКАЛАВРАТ',
+    title: 'Освітня програма (бакалавр)',
+    text: 'Освітньо-професійна програма першого (бакалаврського) рівня.',
+    color: '#2563eb', on: '#ffffff',
+    icon: 'M3 9l9-5 9 5-9 5-9-5zM7 11.5V16c0 1 2.2 2.5 5 2.5s5-1.5 5-2.5v-4.5',
+  },
+  {
+    to: '/master-program',
+    tag: 'МАГІСТРАТУРА',
+    title: 'Освітня програма (магістр)',
+    text: 'Освітньо-професійна програма другого (магістерського) рівня.',
+    color: '#dc2626', on: '#ffffff',
+    icon: 'M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5',
+  },
+  {
+    to: '/program-description',
+    tag: 'ОПИС ПРОГРАМИ',
+    title: 'Опис освітньої програми',
+    text: 'Опис програм, навчальні плани та структура підготовки.',
+    color: '#facc15', on: '#000000',
+    icon: 'M6 3h9l4 4v14H6V3zM14 3v5h5M9 13h7M9 17h7',
+  },
+  {
+    to: '/syllabi',
+    tag: 'АРХІВ ДОКУМЕНТІВ',
+    title: 'Силабуси та РПНД',
+    text: 'Робочі програми дисциплін, курсове проєктування та практика.',
+    color: '#000000', on: '#ffffff',
+    icon: 'M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2',
+  },
+];
 
 // Стан активного розділу
 const activeSectionId = ref(null);
@@ -201,21 +266,135 @@ const activeSection = computed(() => {
   return sections.value.find(s => s.id === activeSectionId.value) || null;
 });
 
-// Логіка модального вікна для зображень (сертифікатів)
-const selectedImage = ref(null);
+// Перегляд документів (сертифікатів) з навігацією
+const imgUrl = (p) => (p.startsWith('http') ? p : `http://127.0.0.1:8000${p}`);
+const images = computed(() => activeSection.value?.images ?? []);
+const imageIndex = ref(null);
+const currentImage = computed(() => (imageIndex.value === null ? null : images.value[imageIndex.value] ?? null));
 
-const openImageModal = (img) => {
-  selectedImage.value = img;
+const openImageModal = (i) => {
+  imageIndex.value = i;
   if (import.meta.client) document.body.style.overflow = 'hidden';
 };
 
 const closeImageModal = () => {
-  selectedImage.value = null;
-  if (import.meta.client) document.body.style.overflow = 'auto';
+  imageIndex.value = null;
+  if (import.meta.client) document.body.style.overflow = '';
 };
+
+const stepImage = (d) => {
+  const n = images.value.length;
+  if (n) imageIndex.value = (imageIndex.value + d + n) % n;
+};
+
+// Клавіатура: Esc — закрити, ← → — гортати
+const onKey = (e) => {
+  if (imageIndex.value === null) return;
+  if (e.key === 'Escape') closeImageModal();
+  if (e.key === 'ArrowRight') stepImage(1);
+  if (e.key === 'ArrowLeft') stepImage(-1);
+};
+onMounted(() => window.addEventListener('keydown', onKey));
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', onKey);
+  if (import.meta.client) document.body.style.overflow = '';
+});
 </script>
 
 <style scoped>
+/* ===== Блоки головних сторінок ===== */
+.feat { margin-bottom: 3.5rem; }
+.feat__head { margin-bottom: 2rem; }
+.feat__kicker { margin: 0 0 .4rem; font-size: .75rem; color: #52525b; text-transform: uppercase; letter-spacing: .1em; }
+.feat__title { margin: 0; font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 900; line-height: 1; text-transform: uppercase; letter-spacing: -.03em; }
+.feat__sub { margin: .6rem 0 0; color: #52525b; font-weight: 600; }
+
+.feat__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.75rem; }
+
+.fc { position: relative; display: flex; flex-direction: column; gap: .8rem; min-height: 320px; padding: 1.5rem; overflow: hidden;
+  background: #fff; color: #000; border: 4px solid #000; box-shadow: 8px 8px 0 var(--c); text-decoration: none;
+  transition: transform .18s, box-shadow .18s, background .18s, color .18s; }
+.fc:hover, .fc:focus-visible { transform: translate(-4px, -4px); box-shadow: 12px 12px 0 #000; background: var(--c); color: var(--on); }
+.fc:focus-visible { outline: 4px solid #facc15; outline-offset: 3px; }
+.fc:active { transform: translate(4px, 4px); box-shadow: 0 0 0 #000; }
+
+.fc__n { position: absolute; top: .4rem; right: 1rem; font-size: 4.5rem; line-height: 1; opacity: .08; pointer-events: none; transition: opacity .18s; }
+.fc:hover .fc__n { opacity: .25; }
+
+.fc__icon { display: inline-flex; align-items: center; justify-content: center; width: 3.6rem; height: 3.6rem; margin-bottom: .4rem;
+  background: var(--c); color: var(--on); border: 4px solid #000; box-shadow: 4px 4px 0 #000; transition: background .18s, color .18s; }
+.fc__icon svg { width: 60%; height: 60%; }
+.fc:hover .fc__icon { background: #fff; color: #000; }
+
+.fc__tag { font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; opacity: .7; }
+.fc__t { margin: 0; font-size: clamp(1.3rem, 2vw, 1.7rem); font-weight: 900; line-height: 1.05; text-transform: uppercase; letter-spacing: -.02em; }
+.fc__p { margin: 0; font-size: .9rem; font-weight: 500; line-height: 1.5; opacity: .85; }
+.fc__go { margin-top: auto; display: inline-flex; align-items: center; gap: .6rem; padding-top: 1rem; border-top: 3px dashed currentColor; font-size: .8rem; text-transform: uppercase; }
+.fc__go i { font-style: normal; transition: transform .18s; }
+.fc:hover .fc__go i { transform: translateX(8px); }
+
+/* Розділювач */
+.sep { display: flex; align-items: center; gap: 1rem; margin: 0 0 3rem; }
+.sep__line { flex: 1; height: 8px; background: #000; }
+.sep__txt { flex-shrink: 0; padding: .4rem .9rem; background: #000; color: #fff; font-size: .75rem; letter-spacing: .1em; }
+
+@media (max-width: 1200px) { .feat__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) {
+  .feat__grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .fc { min-height: 0; box-shadow: 6px 6px 0 var(--c); }
+  .sep__txt { font-size: .65rem; }
+}
+@media (prefers-reduced-motion: reduce) { .fc, .fc * { transition-duration: .01ms !important; } }
+
+/* ===== Галерея документів ===== */
+.gal { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 1.75rem; }
+.gal__item { display: flex; flex-direction: column; padding: 0; font: inherit; color: inherit; text-align: left; cursor: zoom-in; background: #fff;
+  border: 4px solid #000; box-shadow: 6px 6px 0 #000; transition: transform .18s, box-shadow .18s; }
+.gal__item:hover, .gal__item:focus-visible { transform: translate(-3px, -3px); box-shadow: 10px 10px 0 #2563eb; }
+.gal__item:focus-visible { outline: 4px solid #facc15; outline-offset: 3px; }
+.gal__frame { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; border-bottom: 4px solid #000;
+  background: repeating-linear-gradient(45deg, #f4f4f0 0 10px, #ebebe4 10px 20px); }
+.gal__frame img { display: block; width: 100%; height: 100%; padding: .75rem; object-fit: contain; transition: transform .3s; }
+.gal__item:hover .gal__frame img { transform: scale(1.04); }
+.gal__no { position: absolute; top: .6rem; left: .6rem; padding: .2rem .5rem; background: #000; color: #fff; font-size: .65rem; letter-spacing: .08em; }
+.gal__zoom { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, .55); opacity: 0; transition: opacity .18s; }
+.gal__zoom b { padding: .5rem .9rem; background: #facc15; color: #000; border: 3px solid #000; font-size: .75rem; text-transform: uppercase; }
+.gal__item:hover .gal__zoom, .gal__item:focus-visible .gal__zoom { opacity: 1; }
+.gal__cap { display: block; padding: .8rem 1rem; background: #000; color: #fff; font-size: .75rem; letter-spacing: .04em; text-transform: uppercase; }
+
+/* ===== Перегляд документа (lightbox) ===== */
+.lb { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: clamp(.5rem, 2.5vw, 1.5rem);
+  background: rgba(0, 0, 0, .92); backdrop-filter: blur(6px); }
+.lb__box { display: flex; flex-direction: column; width: min(1100px, 100%); max-height: 100%; overflow: hidden; background: #f4f4f0; border: 4px solid #000; box-shadow: 12px 12px 0 #facc15; }
+.lb__bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-shrink: 0; padding: .7rem .9rem; background: #000; color: #facc15; }
+.lb__cnt { font-size: .75rem; letter-spacing: .1em; }
+.lb__actions { display: flex; gap: .6rem; }
+.lb__btn { display: inline-flex; align-items: center; justify-content: center; min-width: 2.4rem; min-height: 2.4rem; padding: .3rem .8rem; background: #fff; color: #000; border: 3px solid #fff;
+  font-size: .7rem; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background .12s, color .12s, border-color .12s; }
+.lb__btn:hover { background: #facc15; border-color: #facc15; }
+.lb__btn--x { background: #dc2626; color: #fff; border-color: #dc2626; font-size: 1rem; }
+.lb__btn--x:hover { background: #fff; color: #dc2626; border-color: #fff; }
+.lb__btn:focus-visible, .lb__nav:focus-visible { outline: 4px solid #facc15; outline-offset: 2px; }
+.lb__stage { position: relative; display: flex; align-items: center; justify-content: center; flex: 1; min-height: 0; padding: clamp(.5rem, 2vw, 1.25rem);
+  background: repeating-linear-gradient(45deg, #e4e4e7 0 12px, #dcdce0 12px 24px); }
+.lb__img { display: block; max-width: 100%; max-height: calc(100vh - 12rem); object-fit: contain; background: #fff; border: 3px solid #000; box-shadow: 6px 6px 0 #000; }
+.lb__nav { position: absolute; top: 50%; translate: 0 -50%; z-index: 2; width: 3rem; height: 3rem; background: #fff; border: 4px solid #000; box-shadow: 3px 3px 0 #000; font-size: 1.3rem; cursor: pointer; transition: background .12s; }
+.lb__nav:hover { background: #facc15; }
+.lb__nav--l { left: .75rem; }
+.lb__nav--r { right: .75rem; }
+.lb__cap { flex-shrink: 0; padding: .8rem 1rem; background: #000; color: #fff; text-align: center; font-weight: 800; text-transform: uppercase; font-size: clamp(.8rem, 1.6vw, 1rem); }
+
+.lb-enter-active, .lb-leave-active { transition: opacity .2s; }
+.lb-enter-active .lb__box, .lb-leave-active .lb__box { transition: transform .25s cubic-bezier(.175, .885, .32, 1.275); }
+.lb-enter-from, .lb-leave-to { opacity: 0; }
+.lb-enter-from .lb__box, .lb-leave-to .lb__box { transform: scale(.95) translateY(16px); }
+
+@media (max-width: 640px) {
+  .lb__btn--open { display: none; }
+  .lb__nav { width: 2.4rem; height: 2.4rem; font-size: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) { .gal__item, .gal__item *, .lb *, .lb { transition-duration: .01ms !important; } }
+
 /* Анімація перемикання вкладок */
 .fade-slide-enter-active,
 .fade-slide-leave-active {
@@ -230,21 +409,4 @@ const closeImageModal = () => {
   transform: translateY(-20px);
 }
 
-/* Анімація модального вікна */
-.modal-enter-active,
-.modal-leave-active {
-  transition: opacity 0.3s ease;
-}
-.modal-enter-active .relative,
-.modal-leave-active .relative {
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.modal-enter-from,
-.modal-leave-to {
-  opacity: 0;
-}
-.modal-enter-from .relative,
-.modal-leave-to .relative {
-  transform: scale(0.95) translateY(20px);
-}
 </style>

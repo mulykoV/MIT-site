@@ -77,18 +77,7 @@
           <NuxtLink to="/education-process" class="py-2 hover:text-blue-600 transition-colors">Освітній процес</NuxtLink>
 
           <!-- Дропдаун: НАУКОВА ДІЯЛЬНІСТЬ -->
-          <div class="group relative">
-            <button class="flex items-center gap-1.5 py-2 hover:text-blue-600 transition-colors">
-              <span>Наукова діяльність</span>
-              <span class="font-pixel text-base mt-0.5">▼</span>
-            </button>
-            <div class="absolute top-full left-0 w-full h-2"></div>
-            <div class="absolute top-[calc(100%+8px)] right-0 hidden group-hover:flex flex-col bg-[#F4F4F0] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-72 z-50">
-              <NuxtLink to="/science-directions" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Напрямки наукової діяльності</NuxtLink>
-              <NuxtLink to="/laboratory" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Лабораторія сенсорного моніторингу</NuxtLink>
-              <NuxtLink to="/research-projects" class="block px-4 py-3 hover:bg-blue-600 hover:text-[#F4F4F0]">Науково дослідні проєкти</NuxtLink>
-            </div>
-          </div>
+          <NuxtLink to="/science-edu-process" class="py-2 hover:text-blue-600 transition-colors">Наукова діяльність</NuxtLink>
 
           <!-- Звичайне посилання: ГАЛЕРЕЯ -->
           <NuxtLink to="/gallery" class="py-2 hover:text-blue-600 transition-colors">Галерея</NuxtLink>

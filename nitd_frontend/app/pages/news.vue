@@ -9,7 +9,6 @@
           <p class="tag font-pixel">[ ЕФІР КАФЕДРИ ]</p>
           <h1 class="title">Системні<br /><span class="title__mark">оновлення</span></h1>
         </div>
-        <NuxtLink to="/" class="btn btn--light font-pixel">← На головну</NuxtLink>
       </header>
 
       <!-- LIVE стрічка -->

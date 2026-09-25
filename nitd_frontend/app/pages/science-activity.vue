@@ -21,12 +21,7 @@
             НАПРЯМКИ <br><span class="text-white bg-black px-3 mt-2 inline-block shadow-[8px_8px_0px_0px_rgba(220,38,38,1)]">НАУКОВОЇ ДІЯЛЬНОСТІ</span>
           </h1>
         </div>
-        
-        <div class="flex flex-col gap-2">
-          <NuxtLink to="/" class="font-pixel text-xs bg-white text-black px-6 py-3 uppercase border-4 border-black hover:bg-black hover:text-white transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-center">
-            ← НА ГОЛОВНУ
-          </NuxtLink>
-        </div>
+      
       </div>
 
       <!-- СІТКА ПРОЄКТІВ -->

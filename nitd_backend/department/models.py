@@ -31,19 +31,43 @@ class Teacher(models.Model):
 
 
 class Course(models.Model):
+    DEGREE_CHOICES = [
+        ('bsc', 'Бакалавр'),
+        ('msc', 'Магістр'),
+    ]
+    
+    CATEGORY_CHOICES = [
+        ('mandatory', 'Обов\'язкові компоненти'),
+        ('block', 'Вибіркові блоки'),
+        ('list', 'Вибір з переліку'),
+        ('free', 'Факультативи / Вільний вибір'),
+    ]
+
     title = models.CharField(max_length=200, verbose_name="Назва дисципліни")
-    description = models.TextField(verbose_name="Опис")
-    teachers = models.ManyToManyField(Teacher, related_name='courses', verbose_name="Викладачі")
-    study_year = models.PositiveSmallIntegerField(verbose_name="Курс (рік навчання)")
-    semester = models.PositiveSmallIntegerField(verbose_name="Семестр", blank=True, null=True)
+    description = models.TextField(verbose_name="Опис", blank=True, null=True)
+    
+    # Нові поля для фільтрації
+    degree = models.CharField(max_length=10, choices=DEGREE_CHOICES, default='bsc', verbose_name="Рівень вищої освіти")
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='mandatory', verbose_name="Категорія")
+    subcategory = models.CharField(max_length=100, blank=True, verbose_name="Підкатегорія (напр. '1 КУРС' або 'Блок 1')")
+    
+    # Викладачі (текстом, бо там багато регалій типу "д.т.н., проф.")
+    teachers_text = models.CharField(max_length=255, blank=True, verbose_name="Викладачі (ПІБ та регалії)")
+    
+    # Документи
+    rpnd_file = models.FileField(upload_to='syllabi/', blank=True, null=True, verbose_name="РПНД (Файл)")
+    syllabus_file = models.FileField(upload_to='syllabi/', blank=True, null=True, verbose_name="Силабус / РП (Файл)")
+
+    # Зв'язок з реальною моделлю викладачів (залишаємо для сторінки дисциплін)
+    teachers = models.ManyToManyField('Teacher', related_name='courses', blank=True, verbose_name="Прив'язка до профілів викладачів")
 
     class Meta:
         verbose_name = "Дисципліна"
-        verbose_name_plural = "Дисципліни"
+        verbose_name_plural = "Дисципліни (Силабуси)"
+        ordering = ['degree', 'category', 'subcategory', 'title']
 
     def __str__(self):
-        return self.title
-
+        return f"[{self.get_degree_display()}] {self.title}"
 
 # --- НОВІ МОДЕЛІ ДЛЯ НОВИН ---
 
@@ -287,3 +311,39 @@ class EduImage(models.Model):  # сертифікати та інші зобра
 
     class Meta:
         ordering = ["order", "id"]
+
+class ProgramFeedback(models.Model):
+    name = models.CharField(max_length=150, verbose_name="ПІБ")
+    email = models.EmailField(verbose_name="Email")
+    message = models.TextField(verbose_name="Повідомлення")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата відправки")
+
+    class Meta:
+        verbose_name = "Пропозиція до програми"
+        verbose_name_plural = "Пропозиції до програм"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"Пропозиція від {self.name} ({self.created_at.strftime('%d.%m.%Y')})"
+
+class GalleryItem(models.Model):
+    CATEGORY_CHOICES = [
+        ('science', 'Наукова діяльність'),
+        ('education', 'Навчальний процес'),
+        ('students', 'Студентське життя'),
+        ('events', 'Івенти та Хакатони'),
+    ]
+
+    title = models.CharField(max_length=200, verbose_name="Підпис до фото")
+    image = models.ImageField(upload_to='gallery/', verbose_name="Фотографія")
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default='students', verbose_name="Категорія")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата додавання")
+    is_published = models.BooleanField(default=True, verbose_name="Опубліковано")
+
+    class Meta:
+        verbose_name = "Фотографія"
+        verbose_name_plural = "Галерея"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"[{self.get_category_display()}] {self.title}"
