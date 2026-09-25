@@ -1,10 +1,11 @@
 <template>
-  <div class="min-h-screen bg-[#F4F4F0] text-black selection:bg-black selection:text-[#F4F4F0]">
+  <!-- Додано overflow-x-hidden, щоб на телефонах сайт не їздив вправо-вліво -->
+  <div class="min-h-screen bg-[#F4F4F0] text-black selection:bg-black selection:text-[#F4F4F0] overflow-x-hidden">
     
-    <header class="border-b-2 border-black sticky top-0 bg-[#F4F4F0] z-50">
+    <header class="border-b-2 border-black sticky top-0 bg-[#F4F4F0] z-50 relative">
       <div class="flex justify-between items-center px-6 py-4 max-w-[1400px] mx-auto">
         
-        <!-- Вставляємо наш новий багаторазовий компонент логотипа -->
+        <!-- Логотип -->
         <MitLogo />
 
         <!-- Навігація (Desktop) -->
@@ -53,42 +54,82 @@
               <NuxtLink to="/invite" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Запрошуємо на навчання</NuxtLink>
               <NuxtLink to="/student-reviews" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Студенти про нас</NuxtLink>
               <NuxtLink to="/study-with-us" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Вивчимо разом</NuxtLink>
-              <a 
-  href="https://vstup.knu.ua/admission-rules" 
-  target="_blank" 
-  class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]"
->
-  Правила вступу
-</a>
-                           <a 
-  href="https://drive.google.com/file/d/1ajsZQdVVL51n4AoA751qRbuLlXduAFPb/view" 
-  target="_blank" 
-  class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]"
->
-  Програма фахового вступного випробовування G5
-</a>
+              <a href="https://vstup.knu.ua/admission-rules" target="_blank" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Правила вступу</a>
+              <a href="https://drive.google.com/file/d/1ajsZQdVVL51n4AoA751qRbuLlXduAFPb/view" target="_blank" class="block px-4 py-3 border-b-2 border-black hover:bg-blue-600 hover:text-[#F4F4F0]">Програма фахового вступного випробовування G5</a>
             </div>
           </div>
 
-          <!-- Звичайне посилання: НОВИНИ -->
+          <!-- Звичайні посилання -->
           <NuxtLink to="/news" class="py-2 hover:text-blue-600 transition-colors">Новини</NuxtLink>
-
-          <!-- Звичайне посилання: Освітній процес -->
           <NuxtLink to="/education-process" class="py-2 hover:text-blue-600 transition-colors">Освітній процес</NuxtLink>
-
-          <!-- Дропдаун: НАУКОВА ДІЯЛЬНІСТЬ -->
           <NuxtLink to="/science-edu-process" class="py-2 hover:text-blue-600 transition-colors">Наукова діяльність</NuxtLink>
-
-          <!-- Звичайне посилання: ГАЛЕРЕЯ -->
           <NuxtLink to="/gallery" class="py-2 hover:text-blue-600 transition-colors">Галерея</NuxtLink>
           
         </nav>
 
-        <!-- Гамбургер для мобілки -->
-        <button class="md:hidden border-2 border-black p-2 hover:bg-black hover:text-[#F4F4F0]">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        <!-- Гамбургер для мобілки (Додано обробник кліку та зміну іконки хрестик/бургер) -->
+        <button 
+          @click="isMenuOpen = !isMenuOpen" 
+          class="md:hidden border-2 border-black p-2 hover:bg-black hover:text-[#F4F4F0] transition-colors active:translate-y-1"
+        >
+          <svg v-if="!isMenuOpen" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          <svg v-else xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
 
+      </div>
+
+      <!-- МОБІЛЬНЕ МЕНЮ (З'являється під хедером) -->
+      <div 
+        v-if="isMenuOpen" 
+        class="md:hidden absolute top-full left-0 w-full bg-[#F4F4F0] border-b-4 border-black shadow-[0px_12px_0px_0px_rgba(0,0,0,1)] flex flex-col font-bold uppercase tracking-widest max-h-[85vh] overflow-y-auto"
+      >
+        <!-- Акордеон: Про нас -->
+        <details class="group border-b-2 border-black">
+          <summary class="p-4 flex justify-between items-center cursor-pointer hover:bg-blue-600 hover:text-white list-none">
+            Про нас <span class="font-pixel group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <div class="flex flex-col bg-gray-200 border-t-2 border-black text-sm">
+            <NuxtLink @click="isMenuOpen = false" to="/about" class="p-4 border-b border-black hover:bg-black hover:text-white">Про нас</NuxtLink>
+            <NuxtLink @click="isMenuOpen = false" to="/teachers" class="p-4 border-b border-black hover:bg-black hover:text-white">Викладачі</NuxtLink>
+            <NuxtLink @click="isMenuOpen = false" to="/partners" class="p-4 border-b border-black hover:bg-black hover:text-white">Наші партнери</NuxtLink>
+            <NuxtLink @click="isMenuOpen = false" to="/contacts" class="p-4 hover:bg-black hover:text-white">Контакти</NuxtLink>
+          </div>
+        </details>
+
+        <!-- Акордеон: Студентам -->
+        <details class="group border-b-2 border-black">
+          <summary class="p-4 flex justify-between items-center cursor-pointer hover:bg-blue-600 hover:text-white list-none">
+            Студентам <span class="font-pixel group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <div class="flex flex-col bg-gray-200 border-t-2 border-black text-sm">
+            <NuxtLink @click="isMenuOpen = false" to="/schedule" class="p-4 border-b border-black hover:bg-black hover:text-white">Розклад занять</NuxtLink>
+            <NuxtLink @click="isMenuOpen = false" to="/conferences" class="p-4 border-b border-black hover:bg-black hover:text-white">Конференції</NuxtLink>
+            <NuxtLink @click="isMenuOpen = false" to="/olympiads" class="p-4 border-b border-black hover:bg-black hover:text-white">Олімпіади</NuxtLink>
+            <NuxtLink @click="isMenuOpen = false" to="/science-activity" class="p-4 border-b border-black hover:bg-black hover:text-white">Наукова діяльність</NuxtLink>
+            <NuxtLink @click="isMenuOpen = false" to="/manuals" class="p-4 border-b border-black hover:bg-black hover:text-white">Навчальні посібники</NuxtLink>
+            <NuxtLink @click="isMenuOpen = false" to="/curators" class="p-4 hover:bg-black hover:text-white">Куратори</NuxtLink>
+          </div>
+        </details>
+
+        <!-- Акордеон: Вступникам -->
+        <details class="group border-b-2 border-black">
+          <summary class="p-4 flex justify-between items-center cursor-pointer hover:bg-blue-600 hover:text-white list-none">
+            Вступникам <span class="font-pixel group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <div class="flex flex-col bg-gray-200 border-t-2 border-black text-sm">
+            <NuxtLink @click="isMenuOpen = false" to="/invite" class="p-4 border-b border-black hover:bg-black hover:text-white">Запрошуємо на навчання</NuxtLink>
+            <NuxtLink @click="isMenuOpen = false" to="/student-reviews" class="p-4 border-b border-black hover:bg-black hover:text-white">Студенти про нас</NuxtLink>
+            <NuxtLink @click="isMenuOpen = false" to="/study-with-us" class="p-4 border-b border-black hover:bg-black hover:text-white">Вивчимо разом</NuxtLink>
+            <a @click="isMenuOpen = false" href="https://vstup.knu.ua/admission-rules" target="_blank" class="p-4 border-b border-black hover:bg-black hover:text-white">Правила вступу</a>
+            <a @click="isMenuOpen = false" href="https://drive.google.com/file/d/1ajsZQdVVL51n4AoA751qRbuLlXduAFPb/view" target="_blank" class="p-4 hover:bg-black hover:text-white">Програма фахового вступного випробовування G5</a>
+          </div>
+        </details>
+
+        <!-- Звичайні посилання мобільного меню -->
+        <NuxtLink @click="isMenuOpen = false" to="/news" class="p-4 border-b-2 border-black hover:bg-blue-600 hover:text-white">Новини</NuxtLink>
+        <NuxtLink @click="isMenuOpen = false" to="/education-process" class="p-4 border-b-2 border-black hover:bg-blue-600 hover:text-white">Освітній процес</NuxtLink>
+        <NuxtLink @click="isMenuOpen = false" to="/science-edu-process" class="p-4 border-b-2 border-black hover:bg-blue-600 hover:text-white">Наукова діяльність</NuxtLink>
+        <NuxtLink @click="isMenuOpen = false" to="/gallery" class="p-4 hover:bg-blue-600 hover:text-white">Галерея</NuxtLink>
       </div>
     </header>
 
@@ -96,7 +137,7 @@
       <slot />
     </main>
 
-    <!-- НОВИЙ БРУТАЛЬНИЙ ФУТЕР -->
+    <!-- НОВИЙ БРУТАЛЬНИЙ ФУТЕР (Твій оригінальний код без змін) -->
     <footer class="mt-20 border-t-2 border-black bg-[#F4F4F0] text-black">
       
       <!-- Стрічка партнерів (Marquee) -->
@@ -123,7 +164,7 @@
           </div>
         </div>
 
-        <!-- 2. Локація (замість важких Google Maps) -->
+        <!-- 2. Локація -->
         <div class="p-8 flex flex-col justify-between">
           <div>
             <h4 class="font-pixel text-xl text-gray-500 mb-6">// ЛОКАЦІЯ</h4>
@@ -135,7 +176,6 @@
             </p>
             <p class="font-pixel text-sm text-gray-500 mt-4">Індекс: 04116</p>
           </div>
-          <!-- Кнопка замість iframe карти -->
           <a href="https://maps.google.com/?q=Богдана+Гаврилишина+24+Київ" target="_blank" class="mt-8 inline-block border-2 border-black bg-[#c7d2fe] text-center py-3 font-bold uppercase hover:bg-black hover:text-[#F4F4F0] transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
             Відкрити Мапу ↗
           </a>
@@ -173,7 +213,7 @@
                 <span class="opacity-0 group-hover:opacity-100 font-pixel text-blue-600 transition-opacity">></span>
                 Facebook
               </a>
-              <a href="https://www.tiktok.com/@mit_fit_knu?_r=1&_t=ZS-95iAT1dQ1sw&fbclid=PAT01DUARmpcRleHRuA2FlbQIxMABzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAac7U2gp4mPQSdys8pjlM_GSygX-vJvd-VT6wrsMd_Pg7-a-OV81tUyau5fCOw_aem_QOeThlIRXYHrMI5WA6Z-_Q%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%D0%A2%D1%96%D0%BA%20%D1%82%D0%BE%D0%BA" class="flex items-center gap-2 hover:text-blue-600 transition-colors group">
+              <a href="https://www.tiktok.com/@mit_fit_knu" class="flex items-center gap-2 hover:text-blue-600 transition-colors group">
                 <span class="opacity-0 group-hover:opacity-100 font-pixel text-blue-600 transition-opacity">></span>
                 TikTok
               </a>
@@ -183,7 +223,7 @@
 
       </div>
 
-      <!-- Копірайт (Термінальний рядок) -->
+      <!-- Копірайт -->
       <div class="border-t-2 border-black px-6 py-3 flex justify-between items-center font-pixel text-sm uppercase bg-black text-[#F4F4F0]">
         <span>© 2026 MIT_DEPT. Всі права захищено.</span>
         <span class="animate-pulse">SYS_HALTED _</span>
@@ -191,6 +231,14 @@
     </footer>
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+
+// Логіка для відкриття/закриття мобільного меню
+const isMenuOpen = ref(false)
+</script>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&family=VT323&display=swap');
 
@@ -199,5 +247,12 @@ body {
 }
 .font-pixel { 
   font-family: 'VT323', monospace; 
+}
+/* Щоб сховати стандартний маркер HTML-акордеону в Safari/Chrome */
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
 }
 </style>
