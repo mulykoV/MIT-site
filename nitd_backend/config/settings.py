@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-_irgg=xuvl2n!7i5&t0w)$-!zm439ek$lhhf0earshf#n+(2k+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [*]
 
 
 # Application definition
@@ -43,9 +43,7 @@ INSTALLED_APPS = [
     "nested_admin",
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
+CORS_ALLOWED_ORIGINS = True
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
