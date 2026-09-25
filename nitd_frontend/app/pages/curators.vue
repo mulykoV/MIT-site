@@ -128,7 +128,7 @@
 <script setup>
 import { computed } from 'vue';
 
-const { data: dbCurators, pending, error } = await useFetch('http://127.0.0.1:8000/api/v1/curators/', {
+const { data: dbCurators, pending, error } = await useFetch('https://mit-site-3t9h.vercel.app/api/v1/curators/', {
   default: () => []
 });
 
